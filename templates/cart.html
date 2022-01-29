@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}
+    Your cart
+{% endblock %}
+
+{% block main %}
+<h3>Items in your cart:</h3>
+{% if items|length > 0 %}
+<table border ="2" width="100%" class="table">
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Qty</th>
+        <th>Price</th>
+    </tr>
+    {% for c in items %}
+    <tr>
+        <td><img src ="{{c.book.image}}" height = "200" width = "150"></td>
+        <td>{{ c.book.name }}</td>
+        <td class="text-end">{{ c.qty}}</td>
+        <td class="text-end">{{ c.book.price | usd}}</td>
+    </tr>
+    {% endfor %}
+    
+</table>
+<br>
+<form action ="/checkout" method = "POST">
+<tfoot>
+    <button class="btn btn-primary" type="submit" >Checkout</button>
+</tfoot>
+</form>
+{% else %}
+    No Items Yet. 
+{% endif %}
+{% endblock %}

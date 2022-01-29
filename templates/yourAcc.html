@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}
+    Your Account
+{% endblock %}
+
+{% block main %}
+<style>
+    .info {
+      margin: 40px;
+      border: 3px solid #000000;
+      text-align: center;
+    }
+    </style>
+<div class = "info">
+<p style="font-size:20px" ><b>Username :</b> {{user.username}}</p>
+<p style="font-size:20px" ><b>Address : </b>{{user.address}} </p>
+<p style="font-size:20px" ><b>Country :</b> {{user.country}}</p>
+<p style="font-size:20px" ><b>State : </b>{{ user.state}}</p>
+<p style="font-size:20px" ><b>City : </b>{{ user.city}}</p>
+</div>
+{% endblock %}

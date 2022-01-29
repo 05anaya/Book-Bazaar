@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Details
+{% endblock %}
+
+{% block main %}
+<style>
+.space {
+    column-count: 3;
+    column-gap: 80px;
+  }
+.spacing{
+  column-rule: 4px double #ff00ff;
+}
+  </style>
+<div class="row">
+    <div class="column">
+<table class = "spacing">
+    <tr>
+        <td colspan="3">
+            <h5>
+             {{book.name}}
+            </h5>
+        </td>
+    </tr>       
+    <tr>
+        <td width="300px">
+            <img src = "{{ book.image }}" alt ="{{ book.name }}" height = "300" width = "200">
+        </td> 
+        <td width="200px">
+            <p><b>Price: </b>{{ book.price | usd }}</p>
+            <p><b>Genre: </b>{{ book.genres }}</p>
+            <p><b>Age: </b>{{ book.minAge }}+</p>
+        </td>
+        <td width="200px">
+            <form action="\cart" method="post">
+                <input type="hidden" name="bookid" value="{{ book.id }}"/>
+                <button type="submit">Add To Cart</button>
+            </form>
+        </td>
+    </tr>
+   </table>
+   <br>
+   <br>
+   <br>
+   <br>
+   <hr>
+   <h3>Other books in the series:</h3>
+   <table class ="space">
+       <tr>
+        {% if series|length > 0 %}
+            {% for bk in series %}
+            <td>
+            <a href="/details/{{bk.id}}"> <img src = "{{bk.image}}" alt = "{{bk.name}}" width="200" height="300">
+                <p><h5>{{bk.name}}</h5></p></a>
+                </td>
+                {% if loop.index % 3 == 0 %}
+                </tr>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+        No books in series.
+        {% endif %}
+
+   </table>
+{% endblock %}

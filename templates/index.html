@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+{% block title %}
+    index
+{% endblock %}
+
+{% block main %}
+
+<style>
+.row {
+    margin-left:-5px;
+    margin-right:-5px;
+  }
+
+  .column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+  }
+
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  table {
+  width: 80%;
+  
+}
+</style>
+
+<div class="row">
+    <div class="column">
+<table>
+    <tr>
+        <td>
+            <h3>
+             Filter by Categories
+            </h3>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Author
+                  </button>
+                </h2>
+              </div>
+              {% for author in authors %}
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  <a href='/?author={{ author["author"] }}'>{{ author["author"] }}</a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Genres
+                  </button>
+                </h2>
+              </div>
+              {% for genre in genres %}
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  <a href='/?genre={{ genre["genres"] }}'>{{ genre["genres"] }}</a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Age
+                  </button>
+                </h2>
+              </div>
+              {% for a in age %}
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                  <a href='/?age={{ a["minAge"] }}'>{{ a["minAge"] }}+</a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </td>      
+    </tr>
+</table> 
+</div>
+<div class="column">
+<table>
+    <tr>
+        {% for book in books %}
+        <td>
+            <a href="/details/{{book.id}}"> <img src = "{{book.image}}" alt = "{{book.name}}" width="200" height="300">
+            <p><h5>{{book.name}}</h5></p></a>
+        </td>
+        {% if loop.index % 3 == 0 %}
+        </tr>
+        <tr>
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}

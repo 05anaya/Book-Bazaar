@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}
+    Your Account
+{% endblock %}
+{% block main %}
+{% if items|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-start">Time</th>
+            <th class="text-start">Order Number</th>
+            <th class="text-start">Book</th>
+            <th class="text-start">Quantity</th>
+            <th class="text-start">Price</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in items %}
+            <tr>
+                <td class="text-end">{{i.time}} </td>
+                <td>BB-{{i.order_id}}</td>
+                <td class="text-start"><img src="{{i.image}}" alt = "{{i.name}}" height = "150" width = "100"></td>
+                <td class="text-end">{{i.qty}}</td>
+                <td class="text-end">${{i.price}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    No Orders Yet. 
+{% endif %}
+{% endblock %}
